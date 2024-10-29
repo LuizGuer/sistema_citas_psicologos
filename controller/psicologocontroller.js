@@ -38,10 +38,9 @@ const postPsicologo = async (req, resp = response) => {
     try{
         const psicologo = await 
             PsicologoModel.sequelize.query(
-                "INSERT INTO psicologo (Id_psicologo, Contraseña, Fecha_contratacion  ) VALUES(:paramId_psicologo, :paramContraseña, :paramFecha_contratacion)",
+                "INSERT INTO psicologo (Contraseña, Fecha_contratacion  ) VALUES(:paramContraseña, :paramFecha_contratacion)",
 {
     replacements:{
-        paramId_psicologo:psicologoParam.Id_psicologo,
         paramContraseña:psicologoParam.Contraseña,
         paramFecha_contratacion:psicologoParam.Fecha_contratacion,
     }

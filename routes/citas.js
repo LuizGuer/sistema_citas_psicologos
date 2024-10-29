@@ -2,8 +2,9 @@
 el modelo: materia.js -> tablaMateria
 profesor.js -> tablaProfesor
 */
+
 const {Router} = require('express');
-const {getCitas,
+const {agendarCita,getCitas,
 getCita,
 postCita,
 putCita,
@@ -19,6 +20,7 @@ $ npm install --save oracledb # Oracle Database
 
 */
 
+
 //aquí se van a colocar todas las rutas del proyecto
 
 router.get('/', getCitas);
@@ -26,5 +28,6 @@ router.get('/:cve', getCita);
 router.post('/',    postCita);
 router.put('/:cve', putCita);
 router.delete('/:cve', deleteCita);
+router.post('/agendar-cita', agendarCita);
 
 module.exports = router;

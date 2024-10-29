@@ -1,6 +1,8 @@
 const { response } = require("express");
 //const dbConnection = require('../database/conecta');
 const CitaModel = require('../models/cita');
+const UsuarioModel = require('../models/usuario');
+const PacienteModel = require('../models/paciente');
 
 const {QueryTypes} = require('sequelize');
 
@@ -44,17 +46,14 @@ const postCita = async (req, resp = response) => {
     try{
         const cita = await 
             CitaModel.sequelize.query(
-                "INSERT INTO cita (Id_paciente, Id_psicologo, Tratamiento, Tipo, Hora_inicio, Hora_fin, Estatus, Notas) VALUES(:paramId_cita, :paramId_paciente, :paramId_psicologo, :paramTratamiento, :paramTipo, :paramHora_inicio, :paramHora_fin, :paramEstatus, :paramNotas)",
+                "INSERT INTO cita (Id_paciente, Id_psicologo, Tratamiento, Tipo, Hora_inicio, Estatus, Notas) VALUES(:paramId_paciente, :paramId_psicologo, :paramTratamiento, :paramTipo, :paramHora_inicio, :paramEstatus, :paramNotas)",
 {
     replacements:{
-        paramId_cita:citaParam.Id_cita,
         paramId_paciente:citaParam.Id_paciente,
         paramId_psicologo:citaParam.Id_psicologo,
         paramTratamiento: citaParam.Tratamiento,
         paramTipo: citaParam.Tipo,
-        paramFechaFinal: citaParam.FechaHoraFin,
         paramHora_inicio: citaParam.Hora_inicio,
-        paramHora_fin:citaParam.Hora_fin,
         paramEstatus:citaParam.Estatus,
         paramNotas:citaParam.Notas
     }
@@ -104,7 +103,7 @@ const putCita = async (req, resp = response) => {
     
         try {
             const updatedRows = await CitaModel.sequelize.query(
-                'UPDATE cita SET Id_paciente = :id_paciente, Id_psicologo = :id_psicologo, Tratamiento = :tratamiento, Tipo = :tipo, Hora_inicio = :hora_inicio, Hora_fin = :hora_fin, Estatus = :estatus, Notas = :notas WHERE Id_cita = :cve',
+                'UPDATE cita SET Id_paciente = :id_paciente, Id_psicologo = :id_psicologo, Tratamiento = :tratamiento, Tipo = :tipo, Hora_inicio = :hora_inicio, Estatus = :estatus, Notas = :notas WHERE Id_cita = :cve',
                 {
                     replacements: {
                         cve: cve,
@@ -113,7 +112,6 @@ const putCita = async (req, resp = response) => {
                         tratamiento: body.Tratamiento,
                         tipo: body.Tipo,
                         hora_inicio: body.Hora_inicio,
-                        hora_fin: body.Hora_fin,
                         estatus: body.Estatus,
                         notas: body.Notas
                     },
@@ -160,10 +158,66 @@ const deleteCita = async (req, resp = response) => {
     }
 }
 
+
+
+
+const agendarCita = async (req, resp = response) => {
+    const { Nombre, Apellido_p, Apellido_m, Telefono, Correo, Ocupacion, Fecha_registro, Id_psicologo, Tratamiento, Tipo, Hora_inicio, Estatus, Notas } = req.body;
+
+    try {
+        // Paso 1: Insertar en la tabla `usuarios`
+        const nuevoUsuario = await UsuarioModel.create({
+            Nombre,
+            Apellido_p,
+            Apellido_m,
+            Telefono,
+            Correo
+        });
+        console.log("AQUIIII")
+        console.log(nuevoUsuario); // Verifica aquí
+        const usuarioId = nuevoUsuario.Id_usuarios; // Rescata el ID del usuario recién insertado
+
+        // Paso 2: Insertar en la tabla `pacientes` con el ID del usuario
+        const nuevoPaciente = await PacienteModel.create({
+            Id_paciente: usuarioId, // Asigna el ID del usuario como ID del paciente
+            Ocupacion,
+            Fecha_registro
+        });
+        const pacienteId = nuevoPaciente.Id_paciente; // Rescata el ID del paciente recién insertado
+
+        // Paso 3: Insertar en la tabla `citas` con el ID del paciente
+        const nuevaCita = await CitaModel.create({
+            Id_paciente: pacienteId, // Asigna el ID del paciente a la cita
+            Id_psicologo,
+            Tratamiento,
+            Tipo,
+            Hora_inicio,
+            Estatus,
+            Notas
+        });
+
+        // Retornar una respuesta con los datos de la cita
+        resp.json({
+            mensaje: 'Cita agendada con éxito',
+            usuario: nuevoUsuario,
+            paciente: nuevoPaciente,
+            cita: nuevaCita
+        });
+
+    } catch (error) {
+        console.log(error);
+        resp.status(500).json({
+            mensaje: "Error interno al agendar la cita"
+        });
+    }
+};
+
+
 module.exports = {
     getCitas,
     getCita,
     postCita,
     putCita,
-    deleteCita
+    deleteCita,
+    agendarCita
 }

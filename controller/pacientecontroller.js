@@ -7,7 +7,7 @@ const {QueryTypes} = require('sequelize');
 const getPacientes = async (req, resp=response) => {
     const pacientes = await
         PacienteModel.sequelize.query(
-            "select * from paciente",
+            "select * from pacientes",
             {type:QueryTypes.SELECT}
         );
     resp.json(pacientes);

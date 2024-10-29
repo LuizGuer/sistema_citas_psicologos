@@ -11,6 +11,9 @@ class Server{
 
         //this.routes();
         this.app.use('/cita', require('../routes/citas'));
+        this.app.use('/psicologo', require('../routes/psicologos'));
+        this.app.use('/usuario', require('../routes/usuarios'));
+        this.app.use('/paciente', require('../routes/pacientes'));
     }
 
     async dbConnection(){

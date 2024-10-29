@@ -7,7 +7,7 @@ const {QueryTypes} = require('sequelize');
 const getUsuarios = async (req, resp=response) => {
     const usuarios = await
         UsuarioModel.sequelize.query(
-            "select * from usuario",
+            "select * from usuarios",
             {type:QueryTypes.SELECT}
         );
     resp.json(usuarios);
@@ -42,10 +42,9 @@ const postUsuario = async (req, resp = response) => {
     try{
         const usuario = await 
             UsuarioModel.sequelize.query(
-                "INSERT INTO usuario (Id_usuarios, Nombre, Apellido_p, Apellido_m, Telefono, Correo) VALUES(:paramId_usuarios, :paramNombre, :paramApellido_p, :paramApellido_m, :paramTelefono, :paramCorreo)",
+                "INSERT INTO usuario (Nombre, Apellido_p, Apellido_m, Telefono, Correo) VALUES(:paramNombre, :paramApellido_p, :paramApellido_m, :paramTelefono, :paramCorreo)",
 {
     replacements:{
-        paramId_usuarios:usuarioParam.Id_usuarios,
         paramNombre:usuarioParam.Nombre,
         paramApellido_p:usuarioParam.Apellido_p,
         paramApellido_m:usuarioParam.Apellido_m,
