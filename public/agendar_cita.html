@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -60,91 +60,113 @@
                         </p>
                     </div>
                 </div>
-                <!-- imagenes -->  
+                <!-- imagenes -->
                 <!-- <div>
                     <div class="formatos-img text-center pb-3">
                         <img src="../img/formatos.png" class="img-fluid" alt="">
                     </div>
                 </div> -->
-                
+
                 <!--desde aqui modificas-->
                 <div class="formatos-text text-dark">
-                    
+
                     <!--agregue el action y method-->
-                    <form class="row g-3 mt-3" action="/" method="post">
-                      <h4>Psicologo</h4>
+                    <form class="row g-3 mt-3" id="agendarCitaForm" action="/cita/agendar-cita" method="post">
+                        <h4>Psicologo</h4>
 
                         <div class="col-2">
                             <label class="form-label">Psicologo</label>
-                            <select class="form-select" aria-label="Seleccion de psicologo">
+                            <select class="form-select" aria-label="Seleccion de psicologo" name="Id_psicologo">
                                 <option selected>Psicologo</option>
-                                <option value="1">nombre1</option>
-                                <option value="2">nombre2</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
                             </select>
                         </div>
+
+                        <div class="col-4">
+                            <label for="tratamientoInput" class="form-label">Tratamiento</label>
+                            <input type="text" class="form-control" id="tratamientoInput" name="Tratamiento"
+                                placeholder="Ingrese su nombre">
+                        </div>
+
 
                         <h4>Informacion personal</h4>
 
                         <div class="col-4">
                             <label for="nombreInput" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="nombreInput" name="Nombre" placeholder="Ingrese su nombre">
+                            <input type="text" class="form-control" id="nombreInput" name="Nombre"
+                                placeholder="Ingrese su nombre">
                         </div>
 
                         <div class="col-4">
                             <label for="apellidoPaInput" class="form-label">Apellido paterno</label>
-                            <input type="text" class="form-control" id="apellidoPaInput" name="Apellido_p" placeholder="Ingrese su apellido paterno">
+                            <input type="text" class="form-control" id="apellidoPaInput" name="Apellido_p"
+                                placeholder="Ingrese su apellido paterno">
                         </div>
 
                         <div class="col-4">
                             <label for="apellidoMaInput" class="form-label">Apellido materno</label>
-                            <input type="text" class="form-control" id="apellidoMaInput" name="Apellido_m" placeholder="Ingrese su apellido materno">
+                            <input type="text" class="form-control" id="apellidoMaInput" name="Apellido_m"
+                                placeholder="Ingrese su apellido materno">
                         </div>
 
                         <div class="col-4">
                             <label for="emailInput" class="form-label">Correo electronico</label>
-                            <input type="email" class="form-control" id="emailInput" name="Correo" placeholder="Ingrese su correo">
+                            <input type="email" class="form-control" id="emailInput" name="Correo"
+                                placeholder="Ingrese su correo">
                         </div>
 
                         <div class="col-4">
                             <label for="telefonoInput" class="form-label">Telefono</label>
-                            <input type="tel" class="form-control" id="telefonoInput" name="Telefono" placeholder="Ingrese su telefono">
+                            <input type="tel" class="form-control" id="telefonoInput" name="Telefono"
+                                placeholder="Ingrese su telefono">
                         </div>
 
                         <div class="col-4">
                             <label for="ocupacionInput" class="form-label">Ocupacion</label>
-                            <input type="text" class="form-control" id="ocupacionInput" placeholder="Ingrese su ocupación">
+                            <input type="text" class="form-control" id="ocupacionInput" name="Ocupacion"
+                                placeholder="Ingrese su ocupación">
                         </div>
+
+                        <div class="col-4">
+                            <label for="fechaInput" class="form-label">fecha (Prueba de insert)</label>
+                            <input type="date" class="form-control" id="fechaInput" name="Fecha_registro"
+                                placeholder="Ingrese su ocupación">
+                        </div>
+
 
                         <h4>Horarios</h4>
 
                         <div class="col-4">
                             <label for="diaInput" class="form-label">Día</label>
                             <!-- <input type="number" class="form-control" id="diaInput" > -->
-                            <input type="date" class="form-control" id="diaInput">
+                            <input type="text" class="form-control" id="diaInput" name="Dia">
                         </div>
 
                         <div class="col-4">
                             <label for="horaInInput" class="form-label">Hora inicial</label>
-                            <input type="text" class="form-control" id="horaInInput">
+                            <input type="time" class="form-control" id="horaInInput" name="Hora_inicio">
                         </div>
 
-                        <div class="col-4">
-                            <label for="horaFiInput" class="form-label">Hora final</label>
-                            <input type="text" class="form-control"  id="horaFiInput" readonly>
-                        </div>
 
                         <div class="col-2">
                             <label class="form-label">Tipo de cita</label>
-                            <select class=" form-select" aria-label="Tipos de citas">
+                            <select class=" form-select" aria-label="Tipos de citas" name="Tipo">
                                 <option selected>Tipo de cita</option>
                                 <option value="1">Presencial</option>
                                 <option value="2">Linea</option>
                             </select>
                         </div>
 
-                        <div class="col-12" >
+                        <div class="col-12">
                             <label for="notasInput" class="form-label">Notas</label>
-                            <textarea class="form-control" id="notasInput" rows="3"></textarea>
+                            <textarea class="form-control" id="notasInput" rows="3" name="Notas"></textarea>
+                        </div>
+
+                        <div class="col-4">
+                            <label for="estatusInput" class="form-label">estatus (Prueba de insert)</label>
+                            <input type="text" class="form-control" id="estatusInput" name="Estatus"
+                                placeholder="Ingrese su ocupación">
                         </div>
 
                         <div class="col-12">
@@ -177,6 +199,9 @@
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script> 
+        crossorigin="anonymous"></script>
+
+    <script src="agendar.js"></script>
 </body>
+
 </html>

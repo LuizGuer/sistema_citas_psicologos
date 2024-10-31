@@ -2,9 +2,9 @@
   "name": "23_24bd",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js", 
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon --exec node app.js"
   },
   "keywords": [],
   "author": "",
@@ -17,5 +17,9 @@
     "mariadb": "^3.2.1",
     "mysql2": "^3.6.5",
     "sequelize": "^6.33.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
   }
 }
+

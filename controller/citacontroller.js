@@ -5,6 +5,7 @@ const UsuarioModel = require('../models/usuario');
 const PacienteModel = require('../models/paciente');
 
 const {QueryTypes} = require('sequelize');
+const { param } = require("../routes/citas");
 
 const getCitas = async (req, resp=response) => {
     const citas = await
@@ -41,12 +42,13 @@ const postCita = async (req, resp = response) => {
         Hora_inicio: body.Hora_inicio,
         Hora_fin: body.Hora_fin,
         Estatus: body.Estatus,
-        Notas: body.Notas
+        Notas: body.Notas,
+        Dia: body.Dia
     };
     try{
         const cita = await 
             CitaModel.sequelize.query(
-                "INSERT INTO cita (Id_paciente, Id_psicologo, Tratamiento, Tipo, Hora_inicio, Estatus, Notas) VALUES(:paramId_paciente, :paramId_psicologo, :paramTratamiento, :paramTipo, :paramHora_inicio, :paramEstatus, :paramNotas)",
+                "INSERT INTO cita (Id_paciente, Id_psicologo, Tratamiento, Tipo, Hora_inicio, Estatus, Notas, Dia) VALUES(:paramId_paciente, :paramId_psicologo, :paramTratamiento, :paramTipo, :paramHora_inicio, :paramEstatus, :paramNotas, :paramDia)",
 {
     replacements:{
         paramId_paciente:citaParam.Id_paciente,
@@ -55,7 +57,8 @@ const postCita = async (req, resp = response) => {
         paramTipo: citaParam.Tipo,
         paramHora_inicio: citaParam.Hora_inicio,
         paramEstatus:citaParam.Estatus,
-        paramNotas:citaParam.Notas
+        paramNotas:citaParam.Notas,
+        paramDia:citaParam.Dia
     }
 }
         );
@@ -162,7 +165,7 @@ const deleteCita = async (req, resp = response) => {
 
 
 const agendarCita = async (req, resp = response) => {
-    const { Nombre, Apellido_p, Apellido_m, Telefono, Correo, Ocupacion, Fecha_registro, Id_psicologo, Tratamiento, Tipo, Hora_inicio, Estatus, Notas } = req.body;
+    const { Nombre, Apellido_p, Apellido_m, Telefono, Correo, Ocupacion, Fecha_registro, Id_psicologo, Tratamiento, Tipo, Hora_inicio, Estatus, Notas, Dia } = req.body;
 
     try {
         // Paso 1: Insertar en la tabla `usuarios`
@@ -173,15 +176,14 @@ const agendarCita = async (req, resp = response) => {
             Telefono,
             Correo
         });
-        console.log("AQUIIII")
-        console.log(nuevoUsuario); // Verifica aquí
+        
         const usuarioId = nuevoUsuario.Id_usuarios; // Rescata el ID del usuario recién insertado
 
         // Paso 2: Insertar en la tabla `pacientes` con el ID del usuario
         const nuevoPaciente = await PacienteModel.create({
             Id_paciente: usuarioId, // Asigna el ID del usuario como ID del paciente
             Ocupacion,
-            Fecha_registro
+            Fecha_registro  //debo hacer que se rescate solo
         });
         const pacienteId = nuevoPaciente.Id_paciente; // Rescata el ID del paciente recién insertado
 
@@ -193,7 +195,8 @@ const agendarCita = async (req, resp = response) => {
             Tipo,
             Hora_inicio,
             Estatus,
-            Notas
+            Notas,
+            Dia
         });
 
         // Retornar una respuesta con los datos de la cita
