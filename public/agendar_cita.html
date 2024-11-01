@@ -71,16 +71,13 @@
                 <div class="formatos-text text-dark">
 
                     <!--agregue el action y method-->
-                    <form class="row g-3 mt-3" id="agendarCitaForm" action="/cita/agendar-cita" method="post">
+                    <form class="row g-3 mt-3" id="agendarCitaForm"  method="post"> <!--action="/cita/agendar-cita"-->
                         <h4>Psicologo</h4>
 
                         <div class="col-2">
                             <label class="form-label">Psicologo</label>
                             <select class="form-select" aria-label="Seleccion de psicologo" name="Id_psicologo">
-                                <option selected>Psicologo</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                            </select>
+                            </select>                            
                         </div>
 
                         <div class="col-4">
@@ -128,11 +125,7 @@
                                 placeholder="Ingrese su ocupación">
                         </div>
 
-                        <div class="col-4">
-                            <label for="fechaInput" class="form-label">fecha (Prueba de insert)</label>
-                            <input type="date" class="form-control" id="fechaInput" name="Fecha_registro"
-                                placeholder="Ingrese su ocupación">
-                        </div>
+                        
 
 
                         <h4>Horarios</h4>
@@ -153,8 +146,8 @@
                             <label class="form-label">Tipo de cita</label>
                             <select class=" form-select" aria-label="Tipos de citas" name="Tipo">
                                 <option selected>Tipo de cita</option>
-                                <option value="1">Presencial</option>
-                                <option value="2">Linea</option>
+                                <option value="Presencial">Presencial</option>
+                                <option value="Linea">Linea</option>
                             </select>
                         </div>
 
@@ -201,7 +194,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 
-    <script src="agendar.js"></script>
+<script src="agendar.js"></script>
 </body>
 
 </html>

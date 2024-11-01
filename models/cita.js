@@ -16,7 +16,7 @@ const cita = db.define('cita',{
     Tratamiento: {
         type: DataTypes.STRING,
     },
-    Hora_inicio: {
+    Tipo: {
         type: DataTypes.STRING,
     },
     Hora_inicio: {

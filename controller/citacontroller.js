@@ -199,13 +199,16 @@ const agendarCita = async (req, resp = response) => {
             Dia
         });
 
+        // `resp.status(500).json({
+        //     mensaje: "Cita"
+        // });`
         // Retornar una respuesta con los datos de la cita
-        resp.json({
-            mensaje: 'Cita agendada con éxito',
-            usuario: nuevoUsuario,
-            paciente: nuevoPaciente,
-            cita: nuevaCita
-        });
+        // resp.json({
+        //     mensaje: 'Cita agendada con éxito',
+        //     usuario: nuevoUsuario,
+        //     paciente: nuevoPaciente,
+        //     cita: nuevaCita
+        // });
 
     } catch (error) {
         console.log(error);

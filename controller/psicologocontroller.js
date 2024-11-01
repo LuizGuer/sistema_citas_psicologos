@@ -112,10 +112,26 @@ const deletePsicologo = async (req, resp = response) => {
     }
 }
 
+const getPsicologoVista = async (req, resp=response) => {
+    try {
+        const psicologos = await
+        PsicologoModel.sequelize.query(
+            "SELECT usuarios.Id_usuarios AS Id_psicologo, usuarios.Nombre, usuarios.Apellido_p, usuarios.Apellido_m FROM psicologo JOIN usuarios ON psicologo.Id_psicologo = usuarios.Id_usuarios;",
+            {type:QueryTypes.SELECT}
+        );
+
+        resp.json(psicologos);
+    } catch (error) {
+        console.error("Error al obtener psicólogos:", error);
+        resp.status(500).json({ error: "Error al obtener la lista de psicólogos" });
+    }
+}
+
 module.exports = {
     getPsicologos,
     getPsicologo,
     postPsicologo,
     putPsicologo,
-    deletePsicologo
+    deletePsicologo,
+    getPsicologoVista
 }
