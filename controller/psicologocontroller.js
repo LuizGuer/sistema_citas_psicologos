@@ -1,8 +1,10 @@
 const { response } = require("express");
 //const dbConnection = require('../database/conecta');
+const UsuarioModel = require('../models/usuario')
 const PsicologoModel = require('../models/psicologo');
 
 const {QueryTypes} = require('sequelize');
+const psicologo = require("../models/psicologo");
 
 const getPsicologos = async (req, resp=response) => {
     const psicologos = await
@@ -127,11 +129,45 @@ const getPsicologoVista = async (req, resp=response) => {
     }
 }
 
+//agregar información psicólogo 
+
+const registrarPsicologo = async (req, resp = response) => {
+    const { Nombre, Apellido_p, Apellido_m, Telefono, Correo, Contraseña, Fecha_contratacion} = req.body;
+
+    try {
+        // Paso 1: Insertar en la tabla usuarios
+        const nuevoUsuario= await UsuarioModel.create({
+            Nombre,
+            Apellido_p,
+            Apellido_m,
+            Telefono,
+            Correo
+        });
+        
+        const usuarioId = nuevoUsuario.Id_usuarios; // Rescata el ID del usuario recién insertado
+
+        // Paso 2: Insertar en la tabla psicologo con el ID del usuario
+        const nuevoPsicologo = await PsicologoModel.create({
+            Id_psicologo: usuarioId, // Asigna el ID del usuario como ID del paciente
+            Contraseña,
+            Fecha_contratacion
+        });
+        
+
+    } catch (error) {
+        console.log(error);
+        resp.status(500).json({
+            mensaje: "Error interno al agregar información"
+        });
+    }
+};
+
 module.exports = {
     getPsicologos,
     getPsicologo,
     postPsicologo,
     putPsicologo,
     deletePsicologo,
-    getPsicologoVista
+    getPsicologoVista,
+    registrarPsicologo
 }

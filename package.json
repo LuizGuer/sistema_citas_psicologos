@@ -2,7 +2,7 @@
   "name": "23_24bd",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js", 
+  "main": "app.js",
   "scripts": {
     "dev": "nodemon --exec node app.js"
   },
@@ -13,7 +13,7 @@
     "bootstrap": "^5.3.3",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
-    "express": "^4.18.2",
+    "express": "^4.21.1",
     "mariadb": "^3.2.1",
     "mysql2": "^3.6.5",
     "sequelize": "^6.33.0"
@@ -22,4 +22,3 @@
     "nodemon": "^3.1.7"
   }
 }
-
