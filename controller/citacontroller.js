@@ -194,7 +194,7 @@ const agendarCita = async (req, resp = response) => {
             Tratamiento,
             Tipo,
             Hora_inicio,
-            Estatus,
+            Estatus: 'Pendiente',
             Notas,
             Dia
         });

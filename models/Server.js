@@ -19,7 +19,8 @@ class Server{
         this.app.use('/psicologo', require('../routes/psicologos'));
         this.app.use('/usuario', require('../routes/usuarios'));
         this.app.use('/paciente', require('../routes/pacientes'));
-
+        this.app.use('/servicio', require('../routes/servicios'));
+        this.app.use('/horario', require('../routes/horarios'))
                
     }
 

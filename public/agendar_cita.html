@@ -72,22 +72,22 @@
 
                     <!--agregue el action y method-->
                     <form class="row g-3 mt-3" id="agendarCitaForm"  method="post"> <!--action="/cita/agendar-cita"-->
-                        <h4>Psicologo</h4>
+                        <h4 class="text-center titulos" >Psicologo</h4>
 
-                        <div class="col-2">
+                        <div class="col-6">
                             <label class="form-label">Psicologo</label>
                             <select class="form-select" aria-label="Seleccion de psicologo" name="Id_psicologo">
                             </select>                            
                         </div>
 
-                        <div class="col-4">
+                        <div class="col-6">
                             <label for="tratamientoInput" class="form-label">Tratamiento</label>
-                            <input type="text" class="form-control" id="tratamientoInput" name="Tratamiento"
-                                placeholder="Ingrese su nombre">
+                            <select class="form-select" aria-label="Seleccion de psicologo" name="Tratamiento">
+                            </select> 
                         </div>
 
 
-                        <h4>Informacion personal</h4>
+                        <h4 class="text-center titulos">Informacion personal</h4>
 
                         <div class="col-4">
                             <label for="nombreInput" class="form-label">Nombre</label>
@@ -128,21 +128,21 @@
                         
 
 
-                        <h4>Horarios</h4>
+                        <h4 class="text-center titulos">Horarios</h4>
 
                         <div class="col-4">
                             <label for="diaInput" class="form-label">Día</label>
-                            <!-- <input type="number" class="form-control" id="diaInput" > -->
-                            <input type="text" class="form-control" id="diaInput" name="Dia">
+                            <select class="form-select" aria-label="Seleccion de dia" name="Dia">
+                            </select> 
                         </div>
 
                         <div class="col-4">
                             <label for="horaInInput" class="form-label">Hora inicial</label>
-                            <input type="time" class="form-control" id="horaInInput" name="Hora_inicio">
+                            <select class="form-select" aria-label="Seleccion de dia" name="Hora_inicio">
+                            </select>
                         </div>
 
-
-                        <div class="col-2">
+                        <div class="col-4">
                             <label class="form-label">Tipo de cita</label>
                             <select class=" form-select" aria-label="Tipos de citas" name="Tipo">
                                 <option selected>Tipo de cita</option>
@@ -154,12 +154,6 @@
                         <div class="col-12">
                             <label for="notasInput" class="form-label">Notas</label>
                             <textarea class="form-control" id="notasInput" rows="3" name="Notas"></textarea>
-                        </div>
-
-                        <div class="col-4">
-                            <label for="estatusInput" class="form-label">estatus (Prueba de insert)</label>
-                            <input type="text" class="form-control" id="estatusInput" name="Estatus"
-                                placeholder="Ingrese su ocupación">
                         </div>
 
                         <div class="col-12">

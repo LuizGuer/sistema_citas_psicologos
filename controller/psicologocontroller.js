@@ -7,7 +7,7 @@ const {QueryTypes} = require('sequelize');
 const getPsicologos = async (req, resp=response) => {
     const psicologos = await
         PsicologoModel.sequelize.query(
-            "select * from psicologo",
+            "select * from psicologos",
             {type:QueryTypes.SELECT}
         );
     resp.json(psicologos);
@@ -38,7 +38,7 @@ const postPsicologo = async (req, resp = response) => {
     try{
         const psicologo = await 
             PsicologoModel.sequelize.query(
-                "INSERT INTO psicologo (Contraseña, Fecha_contratacion  ) VALUES(:paramContraseña, :paramFecha_contratacion)",
+                "INSERT INTO psicologos (Contraseña, Fecha_contratacion  ) VALUES(:paramContraseña, :paramFecha_contratacion)",
 {
     replacements:{
         paramContraseña:psicologoParam.Contraseña,
@@ -62,7 +62,7 @@ const putPsicologo = async (req, resp = response) => {
     
         try {
             const updatedRows = await PsicologoModel.sequelize.query(
-                'UPDATE psicologo SET Contraseña = :contraseña, Fecha_contratacion = :fecha_contratacion WHERE Id_psicologo = :cve',
+                'UPDATE psicologos SET Contraseña = :contraseña, Fecha_contratacion = :fecha_contratacion WHERE Id_psicologo = :cve',
                 {
                     replacements: {
                         cve: cve,
@@ -116,7 +116,7 @@ const getPsicologoVista = async (req, resp=response) => {
     try {
         const psicologos = await
         PsicologoModel.sequelize.query(
-            "SELECT usuarios.Id_usuarios AS Id_psicologo, usuarios.Nombre, usuarios.Apellido_p, usuarios.Apellido_m FROM psicologo JOIN usuarios ON psicologo.Id_psicologo = usuarios.Id_usuarios;",
+            "SELECT usuarios.Id_usuarios AS Id_psicologo, usuarios.Nombre, usuarios.Apellido_p, usuarios.Apellido_m FROM psicologos JOIN usuarios ON psicologos.Id_psicologo = usuarios.Id_usuarios;",
             {type:QueryTypes.SELECT}
         );
 
