@@ -167,6 +167,12 @@ const deleteCita = async (req, resp = response) => {
 const agendarCita = async (req, resp = response) => {
     const { Nombre, Apellido_p, Apellido_m, Telefono, Correo, Ocupacion, Fecha_registro, Id_psicologo, Tratamiento, Tipo, Hora_inicio, Estatus, Notas, Dia } = req.body;
 
+    if (!Nombre || !Apellido_p || !Apellido_m || !Telefono || !Correo || !Ocupacion || !Id_psicologo || !Tratamiento || !Tipo || !Hora_inicio || !Dia) {
+        return resp.status(400).json({
+            mensaje: "Todos los campos son obligatorios"
+        });       
+    }
+
     try {
         // Paso 1: Insertar en la tabla `usuarios`
         const nuevoUsuario = await UsuarioModel.create({
@@ -198,17 +204,6 @@ const agendarCita = async (req, resp = response) => {
             Notas,
             Dia
         });
-
-        // `resp.status(500).json({
-        //     mensaje: "Cita"
-        // });`
-        // Retornar una respuesta con los datos de la cita
-        // resp.json({
-        //     mensaje: 'Cita agendada con éxito',
-        //     usuario: nuevoUsuario,
-        //     paciente: nuevoPaciente,
-        //     cita: nuevaCita
-        // });
 
     } catch (error) {
         console.log(error);

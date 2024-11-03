@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", async function() {
         } else {
             const error = await res.json();
             console.error('Error al agendar cita:', error);
-            alert(`Error: ${error.message}`);
+            alert(`Error: ${error.message} ${error.mensaje}`);
         }
 
     });

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+ 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,9 +55,9 @@
                 <div class="text-white">
                     <div class="citas-text text-dark">
                         <h2 class="text-center">Agendar cita</h2>
-                        <p>
+                        <!-- <p>
                             Rellene todos los campos
-                        </p>
+                        </p> -->
                     </div>
                 </div>
                 <!-- imagenes -->
@@ -72,21 +72,7 @@
 
                     <!--agregue el action y method-->
                     <form class="row g-3 mt-3" id="agendarCitaForm"  method="post"> <!--action="/cita/agendar-cita"-->
-                        <h4 class="text-center titulos" >Psicologo</h4>
-
-                        <div class="col-6">
-                            <label class="form-label">Psicologo</label>
-                            <select class="form-select" aria-label="Seleccion de psicologo" name="Id_psicologo">
-                            </select>                            
-                        </div>
-
-                        <div class="col-6">
-                            <label for="tratamientoInput" class="form-label">Tratamiento</label>
-                            <select class="form-select" aria-label="Seleccion de psicologo" name="Tratamiento">
-                            </select> 
-                        </div>
-
-
+                        
                         <h4 class="text-center titulos">Informacion personal</h4>
 
                         <div class="col-4">
@@ -108,8 +94,8 @@
                         </div>
 
                         <div class="col-4">
-                            <label for="emailInput" class="form-label">Correo electronico</label>
-                            <input type="email" class="form-control" id="emailInput" name="Correo"
+                            <label for="email" class="form-label">Correo electronico</label>
+                            <input type="email" class="form-control" id="email" name="Correo"
                                 placeholder="Ingrese su correo">
                         </div>
 
@@ -125,10 +111,22 @@
                                 placeholder="Ingrese su ocupación">
                         </div>
 
+                        <h4 class="text-center titulos" >Psicologo</h4>
+
+                        <div class="col-6">
+                            <label class="form-label">Psicologo</label>
+                            <select class="form-select" aria-label="Seleccion de psicologo" name="Id_psicologo">
+                            </select>                            
+                        </div>
+
+                        <div class="col-6">
+                            <label for="tratamientoInput" class="form-label">Tratamiento</label>
+                            <select class="form-select" aria-label="Seleccion de psicologo" name="Tratamiento">
+                            </select> 
+                        </div>
                         
 
-
-                        <h4 class="text-center titulos">Horarios</h4>
+                        <h4 class="text-center titulos">Horario de consulta</h4>
 
                         <div class="col-4">
                             <label for="diaInput" class="form-label">Día</label>
@@ -145,7 +143,6 @@
                         <div class="col-4">
                             <label class="form-label">Tipo de cita</label>
                             <select class=" form-select" aria-label="Tipos de citas" name="Tipo">
-                                <option selected>Tipo de cita</option>
                                 <option value="Presencial">Presencial</option>
                                 <option value="Linea">Linea</option>
                             </select>
