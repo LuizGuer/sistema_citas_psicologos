@@ -18,6 +18,9 @@ const horario = db.define('horario',{
     },
     Hora_final: {
         type: DataTypes.TIME,
+    },
+    EstadoHorario: {
+        type: DataTypes.BOOLEAN,
     }
 }, {
     timestamps: false,

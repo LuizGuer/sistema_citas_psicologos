@@ -30,6 +30,30 @@ const getHorariosVista = async (req, resp=response) => {
         resp.status(500).json({ error: "Error al obtener la lista de horarios" });
     }
 }
+
+
+
+const getHorarioLista = async (req, resp=response) => {
+    const idPsicologo = req.params.idPsicologo;
+    const Dia = req.params.Dia
+
+    try {
+        const horarios = await HorarioModel.sequelize.query(
+            "SELECT H.Id_horario, H.Hora_inicio AS Hora_inicio FROM horarios H JOIN psicologos P ON P.Id_psicologo = H.Id_psicologo WHERE P.Id_psicologo = ? AND H.Dia = ?;",
+            {
+                replacements: [idPsicologo, Dia],
+                type: QueryTypes.SELECT
+            }
+        );
+        resp.json(horarios);
+    } catch (error) {
+        console.error("Error al obtener horarios:", error);
+        resp.status(500).json({ error: "Error al obtener la lista de horarios" });
+    }
+}
+
+
+
 ///aqui me quede
 const getHorario = async (req, resp = response) => {
     const cve = req.params.cve;
@@ -144,5 +168,6 @@ module.exports = {
     postHorario,
     putHorario,
     deleteHorario,
-    getHorariosVista
+    getHorariosVista,
+    getHorarioLista
 }

@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", async function() {
+        document.addEventListener("DOMContentLoaded", async function() {
 
     try {
         const resPsicologos = await fetch("http://localhost:8001/psicologo/lista");
@@ -46,26 +46,30 @@ document.addEventListener("DOMContentLoaded", async function() {
                     option.value = horario.Dia; 
                     option.textContent = `${horario.Dia}`;
                     selectHorario.appendChild(option);
-                });
+                });    
+
+                // Agregar un listener para el select de días
+                selectHorario.addEventListener('change', async function() {
+                    const diaSeleccionado = this.value;
+                    try {
+                        // Obtener horas disponibles para el día seleccionado
+                        const resHoras = await fetch(`http://localhost:8001/horario/horas/${idPsicologoSeleccionado}/   ${diaSeleccionado}`);
+                        const horas = await resHoras.json();
+
+                        const selectHoras = document.querySelector("select[name='Hora_inicio']");
+                        selectHoras.innerHTML = ''; // Limpiar opciones anteriores
+                        horas.forEach(hora => {
+                            const option = document.createElement("option");
+                            option.value = hora.Hora_inicio; 
+                            option.textContent = `${hora.Hora_inicio}`;
+                            selectHoras.appendChild(option);
+                        });
+                } catch (error) {
+                    console.error("Error al cargar horas para el día seleccionado:", error);
+                }
+            });
             } catch (error) {
                 console.error("Error al cargar dias:", error);
-            }
-
-            // Cargar horarios para el psicólogo seleccionado
-            try {
-                const resHoras = await fetch(`http://localhost:8001/horario/lista/${idPsicologoSeleccionado}`);
-                const horas = await resHoras.json();
-
-                const selectHoras = document.querySelector("select[name='Hora_inicio']");
-                selectHoras.innerHTML = ''; // Limpiar opciones anteriores
-                horas.forEach(hora => {
-                    const option = document.createElement("option");
-                    option.value = hora.Hora_inicio; 
-                    option.textContent = `${hora.Hora_inicio}`;
-                    selectHoras.appendChild(option);
-                });
-            } catch (error) {
-                console.error("Error al cargar horas:", error);
             }
         });
     } catch (error) {

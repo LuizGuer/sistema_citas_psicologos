@@ -3,7 +3,7 @@ const {getHorariosVista,getHorarios,
 getHorario,
 postHorario,
 putHorario,
-deleteHorario} = require('../controller/horariocontroller');
+deleteHorario,getHorarioLista} = require('../controller/horariocontroller');
 const router = Router();
 
 //aquí se van a colocar todas las rutas del proyecto
@@ -14,5 +14,6 @@ router.get('/:cve', getHorario);
 router.post('/',    postHorario);
 router.put('/:cve', putHorario);
 router.delete('/:cve', deleteHorario);
+router.get('/horas/:idPsicologo/:Dia', getHorarioLista);
 
 module.exports = router;
